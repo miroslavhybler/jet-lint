@@ -10,14 +10,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import mir.oslav.jet.annotations.JetBenchmark
+import mir.oslav.jet.annotations.JetExperimental
 import mir.oslav.jet.lint.example.ui.theme.JetlintTheme
 
 class MainActivity : ComponentActivity() {
+
+    @OptIn(JetExperimental::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             JetlintTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -30,6 +33,8 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+@JetExperimental
+@JetBenchmark
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hello $name!",
@@ -37,6 +42,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
+@OptIn(JetExperimental::class)
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {

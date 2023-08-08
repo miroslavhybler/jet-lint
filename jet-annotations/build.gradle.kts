@@ -1,6 +1,14 @@
+import kotlin.collections.mutableMapOf
+import org.jetbrains.dokka.DokkaConfiguration.Visibility
+import java.io.FileInputStream
+import kotlin.collections.mutableListOf
+import java.util.Properties
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.dokka")
+    id("maven-publish")
 }
 
 android {
@@ -44,4 +52,66 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+}
+
+tasks.dokkaHtml.configure {
+    //    outputDirectory.set(rootDir.resolve("docs-html"))
+    outputDirectory.set(buildDir.resolve("dokkaHtml"))
+
+    dokkaSourceSets {
+        configureEach {
+            pluginsMapConfiguration.set(
+                mutableMapOf(
+                    "org.jetbrains.dokka.base.DokkaBase" to """{ "separateInheritedMembers": true}"""
+                )
+            )
+            documentedVisibilities.set(
+                mutableListOf(
+                    Visibility.PUBLIC,
+                    Visibility.PRIVATE,
+                    Visibility.PROTECTED,
+                    Visibility.INTERNAL,
+                    Visibility.PACKAGE
+                )
+            )
+
+            skipEmptyPackages.set(true)
+            includeNonPublic.set(true)
+            skipDeprecated.set(false)
+            reportUndocumented.set(true)
+            includes.from("${projectDir}/packages.md")
+            description = ""
+        }
+    }
+}
+
+publishing {
+    publications {
+        register<MavenPublication>("gazelle-publish") {
+            groupId = "mir.oslav.jet"
+            artifactId = "annotations"
+            version = "1.0.0"
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/miroslavhybler/android-gazelle/")
+
+            val githubProperties = Properties()
+            githubProperties.load(FileInputStream(rootProject.file("github.properties")))
+            val username = githubProperties["github.username"].toString()
+            val token = githubProperties["github.token"].toString()
+
+            credentials {
+                this.username = username
+                this.password = token
+            }
+        }
+    }
 }

@@ -28,5 +28,4 @@ dependencies {
 
     testImplementation("com.android.tools.lint:lint-tests:$lintVersion")
     testImplementation("junit:junit:4.13.2")
-
 }
