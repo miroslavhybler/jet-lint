@@ -43,8 +43,6 @@ android {
 dependencies {
 
     lintPublish(project(":jet-lint"))
-    implementation(project(":jet-lint"))
-
 
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -55,8 +53,7 @@ dependencies {
 }
 
 tasks.dokkaHtml.configure {
-    //    outputDirectory.set(rootDir.resolve("docs-html"))
-    outputDirectory.set(buildDir.resolve("dokkaHtml"))
+    outputDirectory.set(buildDir.resolve(relative = "dokkaHtml"))
 
     dokkaSourceSets {
         configureEach {
@@ -87,7 +84,7 @@ tasks.dokkaHtml.configure {
 
 publishing {
     publications {
-        register<MavenPublication>("gazelle-publish") {
+        register<MavenPublication>(name="jet-annotations-publish") {
             groupId = "mir.oslav.jet"
             artifactId = "annotations"
             version = "1.0.0"
@@ -101,7 +98,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/miroslavhybler/android-gazelle/")
+            url = uri("https://maven.pkg.github.com/miroslavhybler/jet-annotations/")
 
             val githubProperties = Properties()
             githubProperties.load(FileInputStream(rootProject.file("github.properties")))

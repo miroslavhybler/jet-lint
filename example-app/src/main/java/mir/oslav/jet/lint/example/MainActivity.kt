@@ -34,7 +34,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 @JetExperimental
-@JetBenchmark
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hello $name!",
@@ -42,7 +41,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
-@OptIn(JetExperimental::class)
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {

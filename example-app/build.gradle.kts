@@ -35,10 +35,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        /*
         freeCompilerArgs += listOf(
             "-Xopt-in=mir.oslav.jet.annotations.JetExperimental",
             "-Xopt-in=mir.oslav.jet.annotations.JetBenchmark",
             )
+         */
     }
     buildFeatures {
         compose = true

@@ -16,5 +16,8 @@ import androidx.annotation.experimental.Experimental
     AnnotationTarget.FUNCTION,
     AnnotationTarget.CLASS
 )
-@RequiresOptIn
+@RequiresOptIn(
+    message = "This is highly experimental and can change anytime",
+    level = RequiresOptIn.Level.WARNING
+)
 annotation class JetExperimental constructor()
