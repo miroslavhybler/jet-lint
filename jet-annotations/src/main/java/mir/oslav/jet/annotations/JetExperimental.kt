@@ -2,8 +2,6 @@
 
 package mir.oslav.jet.annotations
 
-import androidx.annotation.experimental.Experimental
-
 /**
  * Annotates target as "Experimental" which means annotated target's implementation can change at
  * any time without warning.
@@ -14,10 +12,10 @@ import androidx.annotation.experimental.Experimental
 @Retention(value = AnnotationRetention.BINARY)
 @Target(
     AnnotationTarget.FUNCTION,
-    AnnotationTarget.CLASS
+    AnnotationTarget.CLASS,
 )
 @RequiresOptIn(
-    message = "This is highly experimental and can change anytime",
+    message = "This is highly experimental and can change anytime!",
     level = RequiresOptIn.Level.WARNING
 )
 annotation class JetExperimental constructor()

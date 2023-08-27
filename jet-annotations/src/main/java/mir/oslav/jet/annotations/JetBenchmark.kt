@@ -17,7 +17,7 @@ package mir.oslav.jet.annotations
     AnnotationTarget.CLASS
 )
 @RequiresOptIn(
-    message = "This can be a heavy load for the main thread. This shouldn't be used without baseline profile benchmark",
+    message = "This can be a heavy load for the main thread. This shouldn't be used without baseline profile benchmark for production releases!",
     level = RequiresOptIn.Level.ERROR
 )
 annotation class JetBenchmark constructor()

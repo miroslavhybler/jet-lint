@@ -87,7 +87,7 @@ publishing {
         register<MavenPublication>(name="jet-annotations-publish") {
             groupId = "mir.oslav.jet"
             artifactId = "annotations"
-            version = "1.0.0"
+            version = "1.0.1"
 
             afterEvaluate {
                 from(components["release"])
