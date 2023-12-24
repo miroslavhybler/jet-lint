@@ -44,9 +44,8 @@ dependencies {
 
     lintPublish(project(":jet-lint"))
 
-    implementation("androidx.core:core-ktx:1.10.1")
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -82,33 +81,22 @@ tasks.dokkaHtml.configure {
     }
 }
 
-publishing {
-    publications {
-        register<MavenPublication>(name="jet-annotations-publish") {
-            groupId = "mir.oslav.jet"
-            artifactId = "annotations"
-            version = "1.0.1"
-
-            afterEvaluate {
-                from(components["release"])
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from (components.getByName("release"))
+                groupId = "mir.oslav.jet"
+                artifactId = "animated-icons"
+                version = "1.0.0-alpha07"
+                pom {
+                    description.set("Jitpack.io deploy")
+                }
             }
+
         }
-    }
-
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/miroslavhybler/jet-lint/")
-
-            val githubProperties = Properties()
-            githubProperties.load(FileInputStream(rootProject.file("github.properties")))
-            val username = githubProperties["github.username"].toString()
-            val token = githubProperties["github.token"].toString()
-
-            credentials {
-                this.username = username
-                this.password = token
-            }
+        repositories {
+            mavenLocal()
         }
     }
 }

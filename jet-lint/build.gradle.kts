@@ -1,3 +1,5 @@
+@file:Suppress("GradleDependency")
+
 plugins {
     id("java-library")
     id("kotlin")
@@ -15,14 +17,15 @@ kotlin {
 
 
 dependencies {
-    compileOnly("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
+    compileOnly("org.jetbrains.kotlin:kotlin-stdlib:1.9.21")
 
     val lintVersion = "30.0.0"
     compileOnly("com.android.tools.lint:lint-api:$lintVersion")
     compileOnly("com.android.tools.lint:lint-checks:$lintVersion")
+    compileOnly("com.android.tools.lint:lint-checks:$lintVersion")
 
 
-    val autoServiceVersion = "1.0-rc7"
+    val autoServiceVersion = "1.0"
     kapt("com.google.auto.service:auto-service:$autoServiceVersion")
     compileOnly("com.google.auto.service:auto-service-annotations:$autoServiceVersion")
 
