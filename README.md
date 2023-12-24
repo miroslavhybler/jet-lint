@@ -13,3 +13,22 @@ If you are fully aware, you can supress all warnings by adding these lines into 
             )
     }
 ```
+
+### Add library to your project
+
+**Project's settings.gradle.kts**
+```kotlin
+// Adds maven 
+dependencyResolutionManagement {
+    repositories {
+        maven(url = "https://jitpack.io")
+    }
+}
+```
+
+**Application's module build.gradle.kts**
+```kotlin
+dependencies {
+    implementation("com.github.miroslavhybler:jet-lint:1.0.2")
+}
+```
